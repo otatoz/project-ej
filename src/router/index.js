@@ -43,22 +43,30 @@ export const constantRoutes = [
     hidden: true
   },
 
+  // 项目刚运行时重定向到登录页面
+  {
+    path: '/',
+    redirect: '/login',
+    component: () => import('@/views/login/index')
+  },
+
   {
     path: '/customer',
     component: Layout,
-    redirect: '/customer/list',
     meta: { title: '顾客管理', icon: 'example' },
+    redirect: '/customer/list',
     children: [{
       path: 'list',
-      name: 'Customer',
+      name: 'List',
       component: () => import('@/pages/customer/Customer'),
-      meta: { title: '顾客管理', icon: 'dashboard' }
-    },{
-        path: 'detail',
-        name: 'Detail',
-        component: () => import('@/pages/customer/List'),
-        meta: { title: '顾客详情', icon: 'tree' },
-        hidden: true
+      meta: { title: '顾客', icon: 'dashboard' }
+    },
+    {
+      path: 'detail',
+      name: 'Detail',
+      hidden: true,
+      component: () => import('@/pages/customer/List'),
+      meta: { title: '详情', icon: 'tree' }
     }]
   },
 
@@ -83,7 +91,6 @@ export const constantRoutes = [
       }
     ]
   },
- 
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }

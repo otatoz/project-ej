@@ -110,7 +110,7 @@ export default {
       this.login(this.loginForm).then((res)=>{
         // 跳转到首页
         if(res.status !== 500){
-          this.$router.push({ path:'/' })
+          this.$router.push({ path:'/customer' })
         }
       })
     }
