@@ -44,14 +44,21 @@ export const constantRoutes = [
   },
 
   {
-    path: '/',
+    path: '/customer',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/customer/list',
+    meta: { title: '顾客管理', icon: 'example' },
     children: [{
-      path: 'dashboard',
-      name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
-      meta: { title: '首页', icon: 'dashboard' }
+      path: 'list',
+      name: 'Customer',
+      component: () => import('@/pages/customer/Customer'),
+      meta: { title: '顾客管理', icon: 'dashboard' }
+    },{
+        path: 'detail',
+        name: 'Detail',
+        component: () => import('@/pages/customer/List'),
+        meta: { title: '顾客详情', icon: 'tree' },
+        hidden: true
     }]
   },
 

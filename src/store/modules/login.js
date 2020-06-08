@@ -1,4 +1,4 @@
-import {post} from '@/http/axios'
+import {post_json,get} from '@/http/axios'
 export default {
     // 命名空间
     namespaced:true,
@@ -25,23 +25,27 @@ export default {
     actions:{
         // 登录
         async login(context,params){
-            let res = await post('/user/login',params)
+            let res = await post_json('/user/login',params)
             // 将token设置到浏览器
             localStorage.setItem('token', res.data.token)
             // 将token设置到state中
             context.commit('refreshToken',res.data.token)
-            return res
+            
             // 调用info方法
-            // context.dispatch('info')
+            context.dispatch('info')
+
+            // 将请求结果返回，以便在then中使用
+            return res
         },
         // 根据token换取用户信息
-        // async info(context){
-        //     let token = localStorage.getItem('token')
-        //     let res = await $.get('http://39.96.21.48:8099/manager/user/info',{token})
-        //     // 将用户信息放入浏览器
-        //     localStorage.setItem('userInfo',JSON.stringify(res.data))
-        //     // 将用户信息放入state
-        //     context.commit('refreshInfo',res.data)
-        // }
+        async info(context){
+            console.log(111)
+            let token = localStorage.getItem('token')
+            let res = await get('/user/info',{token})
+            // 将用户信息放入浏览器
+            localStorage.setItem('userInfo',JSON.stringify(res.data))
+            // 将用户信息放入state
+            context.commit('refreshInfo',res.data)
+        }
     }
 }

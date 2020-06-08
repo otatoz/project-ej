@@ -7,6 +7,8 @@ import user from './modules/user'
 
 // 导入登录
 import login from './modules/login'
+// 导入文章管理
+import customer from './modules/customer'
 
 Vue.use(Vuex)
 
@@ -15,7 +17,8 @@ const store = new Vuex.Store({
     app,
     settings,
     user,
-    login
+    login,
+    customer
   },
   getters
 })
