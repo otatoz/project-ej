@@ -71,6 +71,27 @@ export const constantRoutes = [
   },
 
   {
+    path: '/order',
+    component: Layout,
+    meta: { title: '订单管理', icon: 'example' },
+    redirect: '/order/order',
+    children: [{
+      path: 'order',
+      name: 'Order',
+      component: () => import('@/pages/order/List'),
+      meta: { title: '订单管理', icon: 'dashboard' }
+    },
+    // {
+    //   path: 'detail',
+    //   name: 'Detail',
+    //   hidden: true,
+    //   component: () => import('@/pages/customer/List'),
+    //   meta: { title: '详情', icon: 'tree' }
+    // }
+    ]
+  },
+
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',

@@ -30,12 +30,22 @@
       />
       <el-table-column label="操作">
         <template v-slot="slot">
-          <a href="" @click.prevent="deleteHandler(slot.row)">删除</a>
-          <a href="" @click.prevent="detailHandler(slot.row.id)">查看详情</a>
-          <a href="" @click.prevent="editHandler(slot.row)">编辑</a>
+          <el-button @click.prevent="deleteHandler(slot.row)" type="text" size="small">删除</el-button>
+          <el-button @click.prevent="detailHandler(slot.row.id)" type="text" size="small">查看详情</el-button>
+          <el-button @click.prevent="editHandler(slot.row)" type="text" size="small">编辑</el-button>
         </template>
       </el-table-column>
     </el-table>
+
+    <!-- 分页 -->
+    <el-pagination
+      background
+      layout="prev, pager, next"
+      :page-size="customers.pageSize"
+      :current-page="customers.page + 1"
+      :total="customers.total"
+      @current-change="pageChange"
+    />
 
     <!-- 模态框 -->
     <el-dialog title="修改顾客信息" :visible.sync="customer_visible">
@@ -87,7 +97,7 @@ export default {
       },
       params: {
         page: 0,
-        pageSize: 100
+        pageSize: 10
       }
     }
   },
@@ -157,8 +167,19 @@ export default {
       this.customer_form = Object.assign({}, this.customer_form)
       // 用于显示当前顾客的头像
       this.imageUrl = row.imgPhoto
+    },
+    pageChange(page) {
+      this.params.page = page - 1
     }
-  }
+  },
+  watch: {
+    params: {
+      handler: function() {
+        this.findAllCustomer(this.params)
+      },
+      deep: true
+    }
+  },
 }
 </script>
 
