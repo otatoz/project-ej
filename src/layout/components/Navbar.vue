@@ -39,8 +39,14 @@ import Hamburger from '@/components/Hamburger'
 export default {
   data(){
     return {
-      userInfo:JSON.parse(localStorage.getItem('userInfo'))
+      userInfo:''
     }
+  },
+  mounted(){
+    setTimeout(()=>{
+      let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+      this.userInfo = userInfo
+    },400)
   },
   components: {
     Breadcrumb,

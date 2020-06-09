@@ -55,5 +55,31 @@ export function post(url, data) {
   })
 }
 
+//post方法 发送的数据格式为查询字符串(键值对) 当参数为对象嵌套数组的时候使用  ids=1&ids=2  -->批量删除
+export function post_array(url, data) {
+  return axios({
+    method: 'post',
+    url,
+    data:qs.stringify(data,{arrayFormat:'repeat'}),
+    timeout: 10000,
+    headers:{
+      'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'
+    }
+  })
+}
+
+// qs.stringify({ids:[1,2,3]},{arrayFormat:'repeat'})
+// 参数格式：ids=1&ids=2&ids=3 不加[]
+
+// qs.stringify({ids:[1,2,3]},{arrayFormat:'brackets'})
+// 参数格式：ids[]=1&ids[]=2&ids[]=3 加[]
+
+// qs.stringify({ids:[1,2,3]},{arrayFormat:'indices'})
+// 参数格式：ids[0]=1&ids[1]=2&ids[2]=3 加[]和索引
+
+
+
+
 
 
