@@ -7,19 +7,10 @@ export default {
     ordersStatus: []
   },
   getters: {
-    // 待支付
-    orderUnPay(state) {
-      const res = state.ordersStatus.filter((item) => {
-        return item.status == '待支付'
-      })
-      return res
-    },
-    // 待派单
-    orderUnSend(state) {
-      const res = state.ordersStatus.filter((item) => {
-        return item.status == '待派单'
-      })
-      return res
+    ordersStatusFilter(state) {
+      return (status) => {
+        return state.ordersStatus.filter(order => order.status === status)
+      }
     }
   },
   mutations: {
@@ -41,6 +32,11 @@ export default {
     async findAll(context) {
       const res = await get('/order/findAll')
       context.commit('refreshOrderStatus', res.data)
+    },
+    // 派单
+    async sendOrder(context,params) {
+      const res = await get('/order/sendOrder',params)
+      return res
     }
   }
 }

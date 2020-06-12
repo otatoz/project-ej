@@ -2,5 +2,5 @@ build/*.js
 src/assets
 public
 dist
-*.vue
-*.js
+src/pages/*.vue
+src/store/*.js

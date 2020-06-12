@@ -11,6 +11,8 @@ import login from './modules/login'
 import customer from './modules/customer'
 // 导入订单管理
 import order from './modules/order'
+// 导入服务员
+import waiter from './modules/waiter'
 
 Vue.use(Vuex)
 
@@ -21,7 +23,8 @@ const store = new Vuex.Store({
     user,
     login,
     customer,
-    order
+    order,
+    waiter
   },
   getters
 })

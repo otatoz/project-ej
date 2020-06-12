@@ -15,6 +15,13 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+// 导入moment
+import moment from 'moment'
+// 全局过滤器
+Vue.filter('dateFormat', function(dateStr) {
+  return moment(dateStr).format('YYYY-MM-DD hh:mm:ss')
+})
+
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
